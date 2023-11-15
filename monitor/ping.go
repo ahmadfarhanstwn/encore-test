@@ -23,11 +23,11 @@ func Ping(ctx context.Context, url string) (*PingResponse, error) {
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
-		return &PingResponse{Up: false}, err
+		return &PingResponse{Up: false}, nil
 	}
 
 	resp.Body.Close()
 
 	up := resp.StatusCode < 400
-	return &PingResponse{up}, nil
+	return &PingResponse{Up: up}, nil
 }
